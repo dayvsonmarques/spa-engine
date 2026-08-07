@@ -16,6 +16,47 @@
 		return false;
 	}
 
+	function getLoadingBar() {
+		var bar = document.getElementById('spa-loading-bar');
+
+		if (!bar) {
+			bar = document.createElement('div');
+			bar.id = 'spa-loading-bar';
+			bar.style.cssText =
+				'position:fixed;top:0;left:0;height:3px;width:0;' +
+				'background:#2684ff;transition:width .2s ease,opacity .2s ease;' +
+				'z-index:9999;opacity:1;';
+			document.documentElement.appendChild(bar);
+		}
+
+		return bar;
+	}
+
+	function showLoadingBar() {
+		var bar = getLoadingBar();
+
+		bar.style.opacity = '1';
+		bar.style.width = '0';
+
+		window.requestAnimationFrame(function () {
+			bar.style.width = '80%';
+		});
+	}
+
+	function hideLoadingBar() {
+		var bar = document.getElementById('spa-loading-bar');
+
+		if (!bar) {
+			return;
+		}
+
+		bar.style.width = '100%';
+
+		window.setTimeout(function () {
+			bar.style.opacity = '0';
+		}, 200);
+	}
+
 	function executeScriptsInOrder(scripts) {
 		var index = 0;
 
@@ -98,6 +139,8 @@
 	};
 
 	Engine.prototype._navigate = function (href) {
+		showLoadingBar();
+
 		fetch(href)
 			.then(function (response) {
 				if (!response.ok) {
@@ -124,6 +167,8 @@
 				document.body.innerHTML = newDocument.body.innerHTML;
 
 				history.pushState(null, '', href);
+
+				hideLoadingBar();
 
 				executeScriptsInOrder(scripts);
 			})
