@@ -78,6 +78,10 @@
 			return;
 		}
 
+		if (link.hasAttribute('data-no-spa')) {
+			return;
+		}
+
 		var url = new URL(link.href, window.location.href);
 
 		if (url.origin !== window.location.origin) {
