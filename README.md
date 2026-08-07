@@ -8,7 +8,7 @@ intercepts navigation on configured routes, swapping `<body>` content via
 ```html
 <script src="engine.js"></script>
 <script>
-  var engine = new Engine({
+  const engine = new Engine({
     routes: ['*.html', '/site/*'],
     enabled: true,
   });
@@ -56,5 +56,8 @@ DOM/network-dependent behavior is covered by manual testing against
 `example/` instead.
 
 ## Docs
+
+How the engine works internally (summary + detailed walkthrough + flow
+diagram): [`docs/how-it-works.md`](docs/how-it-works.md).
 
 General exercise questions: [`answers.md`](answers.md).
