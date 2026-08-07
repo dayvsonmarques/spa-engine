@@ -58,7 +58,35 @@
 
 		event.preventDefault();
 
-		console.log('SPA would navigate to:', link.href);
+		this._navigate(link.href);
+	};
+
+	Engine.prototype._navigate = function (href) {
+		fetch(href)
+			.then(function (response) {
+				if (!response.ok) {
+					throw new Error('Bad response status: ' + response.status);
+				}
+				return response.text();
+			})
+			.then(function (html) {
+				var parser = new DOMParser();
+				var newDocument = parser.parseFromString(html, 'text/html');
+
+				if (!newDocument.body) {
+					throw new Error('Response has no <body>');
+				}
+
+				var scripts = Array.prototype.slice.call(
+					newDocument.body.querySelectorAll('script')
+				);
+
+				scripts.forEach(function (script) {
+					script.parentNode.removeChild(script);
+				});
+
+				document.body.innerHTML = newDocument.body.innerHTML;
+			});
 	};
 
 	global.Engine = Engine;
