@@ -16,6 +16,38 @@
 		return false;
 	}
 
+	function executeScriptsInOrder(scripts) {
+		var index = 0;
+
+		function runNext() {
+			if (index >= scripts.length) {
+				return;
+			}
+
+			var oldScript = scripts[index];
+			var newScript = document.createElement('script');
+
+			for (var i = 0; i < oldScript.attributes.length; i++) {
+				var attr = oldScript.attributes[i];
+				newScript.setAttribute(attr.name, attr.value);
+			}
+
+			index++;
+
+			if (oldScript.src) {
+				newScript.onload = runNext;
+				newScript.onerror = runNext;
+				document.body.appendChild(newScript);
+			} else {
+				newScript.textContent = oldScript.textContent;
+				document.body.appendChild(newScript);
+				runNext();
+			}
+		}
+
+		runNext();
+	}
+
 	function Engine(config) {
 		this.routes = (config && config.routes) || [];
 		this.enabled = !!(config && config.enabled);
@@ -86,6 +118,8 @@
 				});
 
 				document.body.innerHTML = newDocument.body.innerHTML;
+
+				executeScriptsInOrder(scripts);
 			});
 	};
 
