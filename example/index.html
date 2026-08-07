@@ -12,6 +12,15 @@
 
 	<a href="details.html" data-no-spa="true">Check out more (no SPA, full reload)</a>
 
+	<p>
+		<button
+			data-spa-component="counter"
+			data-count="0"
+			onclick="this.dataset.count = Number(this.dataset.count) + 1; this.textContent = 'Clicks: ' + this.dataset.count;"
+		>Clicks: 0</button>
+		<br><small>(this button's count survives SPA navigation)</small>
+	</p>
+
 	<script src="../engine.js"></script>
 	<script type="text/javascript">
 		var engine = new Engine({

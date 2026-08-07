@@ -16,6 +16,35 @@
 		return false;
 	}
 
+	function swapBodyPreservingComponents(newBody) {
+		var cachedComponents = {};
+		var oldComponents = document.body.querySelectorAll('[data-spa-component]');
+
+		for (var i = 0; i < oldComponents.length; i++) {
+			var oldComponent = oldComponents[i];
+			cachedComponents[oldComponent.getAttribute('data-spa-component')] = oldComponent;
+		}
+
+		var newComponents = newBody.querySelectorAll('[data-spa-component]');
+
+		for (var j = 0; j < newComponents.length; j++) {
+			var newComponent = newComponents[j];
+			var cached = cachedComponents[newComponent.getAttribute('data-spa-component')];
+
+			if (cached) {
+				newComponent.parentNode.replaceChild(cached, newComponent);
+			}
+		}
+
+		while (document.body.firstChild) {
+			document.body.removeChild(document.body.firstChild);
+		}
+
+		while (newBody.firstChild) {
+			document.body.appendChild(newBody.firstChild);
+		}
+	}
+
 	function getLoadingBar() {
 		var bar = document.getElementById('spa-loading-bar');
 
@@ -173,7 +202,7 @@
 					script.parentNode.removeChild(script);
 				});
 
-				document.body.innerHTML = newDocument.body.innerHTML;
+				swapBodyPreservingComponents(newDocument.body);
 
 				if (updateHistory) {
 					history.pushState(null, '', href);
