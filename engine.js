@@ -120,6 +120,8 @@
 				document.body.innerHTML = newDocument.body.innerHTML;
 
 				executeScriptsInOrder(scripts);
+
+				history.pushState(null, '', href);
 			});
 	};
 
