@@ -217,5 +217,10 @@
 			});
 	};
 
+	Engine._internal = {
+		globToRegExp: globToRegExp,
+		matchesAnyRoute: matchesAnyRoute,
+	};
+
 	global.Engine = Engine;
 })(window);
