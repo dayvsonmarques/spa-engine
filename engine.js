@@ -122,6 +122,9 @@
 				executeScriptsInOrder(scripts);
 
 				history.pushState(null, '', href);
+			})
+			.catch(function () {
+				window.location.href = href;
 			});
 	};
 
