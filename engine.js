@@ -94,6 +94,7 @@
 		this.enabled = !!(config && config.enabled);
 
 		document.addEventListener('click', this._handleClick.bind(this));
+		window.addEventListener('popstate', this._handlePopState.bind(this));
 	}
 
 	Engine.prototype._handleClick = function (event) {
@@ -135,10 +136,18 @@
 
 		event.preventDefault();
 
-		this._navigate(link.href);
+		this._navigate(link.href, true);
 	};
 
-	Engine.prototype._navigate = function (href) {
+	Engine.prototype._handlePopState = function () {
+		if (!this.enabled) {
+			return;
+		}
+
+		this._navigate(window.location.href, false);
+	};
+
+	Engine.prototype._navigate = function (href, updateHistory) {
 		showLoadingBar();
 
 		fetch(href)
@@ -166,7 +175,9 @@
 
 				document.body.innerHTML = newDocument.body.innerHTML;
 
-				history.pushState(null, '', href);
+				if (updateHistory) {
+					history.pushState(null, '', href);
+				}
 
 				hideLoadingBar();
 
