@@ -57,7 +57,6 @@ DOM/network-dependent behavior is covered by manual testing against
 
 ## Docs
 
-How the engine works internally (summary + detailed walkthrough + flow
-diagram): [`docs/how-it-works.md`](docs/how-it-works.md).
+How the engine works internally: [`docs/how-it-works.md`](docs/how-it-works.md).
 
 General exercise questions: [`answers.md`](answers.md).
