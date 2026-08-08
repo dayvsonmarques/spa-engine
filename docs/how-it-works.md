@@ -35,3 +35,11 @@ const engine = new Engine({ routes, enabled });
 - Component cache: before swapping, it saves elements with
   `[data-spa-component]` and reuses the same DOM node in the new page — no
   lost state, no flash.
+
+## Known limitations
+
+- A same-page `<a href="#section">` link gets intercepted if its path
+  matches a route, instead of scrolling to the anchor.
+- Each page's own `<script>` (like the init snippet in `example/*.html`)
+  re-runs on every navigation. Listeners and timers it creates are never
+  cleaned up, so they build up over repeated navigation in one session.
