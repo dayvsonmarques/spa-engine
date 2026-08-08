@@ -1,0 +1,13 @@
+{
+  "name": "spa-engine",
+  "version": "1.0.0",
+  "description": "A dependency-free Single Page Application engine (Liferay Frontend Engineer exercise).",
+  "private": true,
+  "main": "engine.js",
+  "scripts": {
+    "test": "node --test test/"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

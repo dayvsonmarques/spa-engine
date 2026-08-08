@@ -1,5 +1,7 @@
 # SPA Engine
 
+[![Test](https://github.com/dayvsonmarques/spa-engine/actions/workflows/test.yml/badge.svg)](https://github.com/dayvsonmarques/spa-engine/actions/workflows/test.yml)
+
 A dependency-free Single Page Application engine (Liferay Frontend Engineer
 exercise). Drop `engine.js` into an existing multi-page site and it
 intercepts navigation on configured routes, swapping `<body>` content via
@@ -47,13 +49,14 @@ link, and try the browser's Back button.
 ## Tests
 
 ```bash
-node --test test/
+npm test
 ```
 
-Zero dependencies (Node's built-in test runner). Covers the route-matching
-logic (`globToRegExp`/`matchesAnyRoute`, exposed via `Engine._internal`).
-DOM/network-dependent behavior is covered by manual testing against
-`example/` instead.
+Zero dependencies (Node's built-in test runner). Runs on every push/PR via
+GitHub Actions ([`.github/workflows/test.yml`](.github/workflows/test.yml)).
+Covers the route-matching logic (`globToRegExp`/`matchesAnyRoute`, exposed
+via `Engine._internal`). DOM/network-dependent behavior is covered by
+manual testing against `example/` instead.
 
 ## Docs
 
