@@ -46,6 +46,13 @@ link, and try the browser's Back button.
 
 > `fetch()` is blocked by CORS on `file://` — you must serve over HTTP.
 
+## Deploy
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/dayvsonmarques/spa-engine)
+
+Zero-config static deploy — `vercel.json` redirects `/` to the demo at
+`/example/index.html`. No build step required.
+
 ## Tests
 
 ```bash
