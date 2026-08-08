@@ -50,8 +50,6 @@ link, and try the browser's Back button.
 
 ## Deploy
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/dayvsonmarques/spa-engine)
-
 Live at https://spa-engine-cmbcdirrj-dayvson-marques-projects.vercel.app/example/index.html.
 Zero-config static deploy — `vercel.json` redirects `/` to the demo at
 `/example/index.html`. No build step required.
